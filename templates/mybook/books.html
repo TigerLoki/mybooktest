@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/books.css" %}"/>
+    <title>My books</title>
+</head>
+<body>
+    {% block content %}
+        <div class="flex-container">
+            {% for book in books %}
+                <div class="book">
+                    <div><img src="https://i1.mybook.io/c/256x426/{{ book.1 }}" alt={{ book.0 }}></div>
+                    <div class="description">
+                        <div class="bookauthor">{{ book.2 }}</div>
+                        <div class="bookname">{{ book.0 }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endblock %}
+</body>
+</html>

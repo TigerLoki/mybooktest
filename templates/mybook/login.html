@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Log in</title>
+</head>
+<body>
+    <form action="/" method="POST">
+        {{ form }}
+        <input type="submit" class="btn" value="Войти"/>
+        {% if not is_valid %}
+            <div>Неверный емаил или пароль</div>
+        {% endif %}
+    </form>
+</body>
+</html>
