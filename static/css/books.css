@@ -15,17 +15,9 @@ img{
 .book {
     display: flex;
     flex-flow: row nowrap;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: 1em;
-}
-
-.book:first-child{
     margin-top: 1em;
-}
-
-.book:last-child{
     margin-bottom: 1em;
+    margin-left: 1em;
 }
 
 .description{
@@ -44,3 +36,9 @@ img{
     font-size: 3em;
 }
 
+.btn-exit{
+    height: 3em;
+    width: 7em;
+    margin-top: 1em;
+    margin-left: 1em;
+}

@@ -5,4 +5,5 @@ from mybook import views
 urlpatterns = [
     re_path(r'^books/', views.get_books),
     path('', views.login),
+    re_path(r'^logout/', views.logout)
 ]

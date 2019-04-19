@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from mybook import forms
+from django.views.decorators.csrf import csrf_exempt
 import requests
 
 
+@csrf_exempt
 def login(request):
-    if 'session' in request.COOKIES:
+    if 'session' in request.session:
         return redirect('/books')
     if request.method == 'POST':
         form = forms.LoginForm(request.POST)
@@ -13,7 +15,8 @@ def login(request):
                 r = requests.post('https://mybook.ru/api/auth/', json=form.get_user())
                 if r.status_code == 200:
                     response = redirect('/books')
-                    response.set_cookie('session', r.cookies['session'])
+                    request.session['session'] = r.cookies['session']
+                    request.session.set_expiry(3600)
                     return response
                 else:
                     form = forms.LoginForm()
@@ -27,9 +30,8 @@ def login(request):
 
 
 def get_books(request):
-    print(request.COOKIES)
-    if 'session' in request.COOKIES:
-        session = request.COOKIES['session']
+    if 'session' in request.session:
+        session = request.session['session']
         headers = {'Accept': 'application/json; version=5'}
         r = requests.get('https://mybook.ru/api/bookuserlist/', headers=headers,
                          cookies={'session': session})
@@ -49,3 +51,13 @@ def get_books(request):
             return redirect('/')
     else:
         return redirect('/')
+
+
+def logout(request):
+    print(request.session.items())
+    if 'session' in request.session:
+        print("logout")
+        request.session.flush()
+        print(request.session.items())
+        return redirect('/')
+    return redirect('/books')
